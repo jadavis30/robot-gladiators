@@ -3,15 +3,15 @@ var fightOrSkip = function() {
     var promptFight = window.prompt('Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
   
     // Enter the conditional recursive function call here!
-    if (!promptFight) {
+    if (promptFight === "" || promptFight === null) {
         window.alert("You need to provide a valid answer! Please try again.");
         return fightOrSkip();
       }
+      promptFight = promptFight.toLowerCase();
     // if player picks "skip" confirm and then stop the loop
     if (promptFight === "skip") {
       // confirm player wants to skip
       var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-  
       // if yes (true), leave fight
         if (confirmSkip) {
             window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
@@ -126,21 +126,17 @@ var fight = function(enemy) {
     };
     var shop = function() {
         var shopOptionPrompt = window.prompt(
-            "Would you like to REFILL your heatlh, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+            "Would you like to REFILL your heatlh, UPGRADE your attack, or LEAVE the store? Please enter 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE to make a choice."
         );
+        shopOptionPrompt = parseInt(shopOptionPrompt);
         switch (shopOptionPrompt) {
-            case "REFILL":
-            case "refill":
+            case 1:
                playerInfo.refillHealth();
-               break;    
-            
-            case"UPGRADE":
-            case "upgrade":
+               break;              
+            case 2:
                 playerInfo.upgradeAttack();
-                break;
-            
-            case "LEAVE": 
-            case "leave":
+                break;            
+            case 3: 
                 window.alert("Leaving the store.");
                 break;
             default:
